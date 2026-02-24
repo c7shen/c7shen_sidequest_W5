@@ -67,8 +67,8 @@ function draw() {
   targetY = constrain(targetY, 0, maxCamY);
 
   // slower emotional lag
-  camX = lerp(camX, targetX, 0.01);
-  camY = lerp(camY, targetY, 0.01);
+  camX = lerp(camX, targetX, 0.008);
+  camY = lerp(camY, targetY, 0.008);
 
   // --- draw ---
   level.drawBackground();
@@ -79,19 +79,6 @@ function draw() {
   level.drawWorld();
   player.draw();
   pop();
-
-  // soft edge fade
-  noStroke();
-  for (let i = 0; i < 80; i++) {
-    fill(0, 0, 0, i * 0.8);
-    rect(i, 0, 1, height);
-    rect(width - i, 0, 1, height);
-    rect(0, i, width, 1);
-    rect(0, height - i, width, 1);
-  }
-
-  // HUD is drawn in SCREEN space (no camera translation).
-  level.drawHUD(player, camX, camY);
 }
 
 function keyPressed() {

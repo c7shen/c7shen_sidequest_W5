@@ -27,7 +27,12 @@ class WorldLevel {
   }
 
   drawBackground() {
-    background(220);
+    for (let i = 0; i < height; i++) {
+      let inter = map(i, 0, height, 0, 1);
+      let c = lerpColor(color(245, 248, 255), color(225, 235, 250), inter);
+      stroke(c);
+      line(0, i, width, i);
+    }
   }
 
   // Draw the world in WORLD coordinates (caller should translate camera first)
@@ -83,6 +88,13 @@ class WorldLevel {
       fill(120, 160, 255, alpha);
 
       ellipse(s.x, s.y, s.size);
+      let pulse = sin(frameCount * 0.05 + s.x) * 2;
+
+      ellipse(s.x, s.y, s.size + pulse);
+
+      //halo
+      fill(120, 160, 255, alpha * 0.2);
+      ellipse(s.x, s.y, s.size * 3);
     }
   }
 
